@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewDepartureCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Город вылета:"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerDepartureCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDepartureCity"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewArrivalCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Город прилёта:"
+        android:layout_below="@id/spinnerDepartureCity"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerArrivalCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewArrivalCity"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewDepartureDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Дата вылета:"
+        android:layout_below="@id/spinnerArrivalCity"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextDepartureDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDepartureDate"
+        android:layout_marginBottom="16dp"
+        android:hint="Введите дату"/>
+
+    <Button
+        android:id="@+id/btnSelectDepartureDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбрать дату вылета"
+        android:onClick="showDepartureDatePickerDialog"
+        android:layout_below="@id/editTextDepartureDate"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewArrivalDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Дата прилёта:"
+        android:layout_below="@id/btnSelectDepartureDate"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextArrivalDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewArrivalDate"
+        android:layout_marginBottom="16dp"
+        android:hint="Введите дату"/>
+
+    <Button
+        android:id="@+id/btnSelectReturnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбрать дату прилета"
+        android:onClick="showReturnDatePickerDialog"
+        android:layout_below="@id/editTextArrivalDate"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewPassengers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Количество пассажиров:"
+        android:layout_below="@id/btnSelectReturnDate"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearPassengers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewPassengers"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/editTextAdults"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Взрослые"/>
+
+        <EditText
+            android:id="@+id/editTextChildren"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Дети"/>
+
+        <EditText
+            android:id="@+id/editTextInfants"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Младенцы"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поиск"
+        android:layout_below="@id/linearPassengers"/>
+
+    <TextView
+        android:id="@+id/textViewSelectedDates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/buttonSearch"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>

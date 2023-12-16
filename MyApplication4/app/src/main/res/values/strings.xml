@@ -1,0 +1,31 @@
+<resources>
+
+    <string name="app_name">Tickets</string>
+    <string-array name="cities">
+        <item>Нью-Йорк</item>
+        <item>Лондон</item>
+        <item>Токио</item>
+        <item>Париж</item>
+        <item>Берлин</item>
+        <item>Москва</item>
+        <item>Пекин</item>
+        <item>Рим</item>
+        <item>Мадрид</item>
+        <item>Стамбул</item>
+        <item>Вашингтон</item>
+        <item>Осака</item>
+        <item>Торонто</item>
+        <item>Сеул</item>
+        <item>Бангкок</item>
+        <item>Сидней</item>
+        <item>Рио-де-Жанейро</item>
+        <item>Мумбаи</item>
+        <item>Каир</item>
+        <item>Ханой</item>
+        <item>Дубай</item>
+        <item>Киев</item>
+        <item>Хельсинки</item>
+        <item>Найроби</item>
+        <item>Лиссабон</item>
+    </string-array>
+</resources>
