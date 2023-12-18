@@ -1,0 +1,39 @@
+<!-- res/layout/activity_guessing.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_guessing"
+    tools:context=".GuessingActivity">
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загадайте число"/>
+
+    <Button
+        android:id="@+id/buttonHigher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewQuestion"
+        android:layout_marginTop="16dp"
+        android:text="Выше"/>
+
+    <Button
+        android:id="@+id/buttonLower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonHigher"
+        android:layout_marginTop="16dp"
+        android:text="Ниже"/>
+
+    <Button
+        android:id="@+id/buttonGuessed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLower"
+        android:layout_marginTop="16dp"
+        android:text="Угадал"/>
+
+</RelativeLayout>
