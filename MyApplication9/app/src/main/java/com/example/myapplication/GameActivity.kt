@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
 
 class GameActivity : AppCompatActivity() {
@@ -48,36 +47,29 @@ class GameActivity : AppCompatActivity() {
         cardValues.shuffle()
 
         for (value in cardValues) {
-            val cardView = createCardView(value)
+            val cardView = createCardView(value, cardCount)
             gridLayout.addView(cardView)
         }
 
-        adjustCardSizes()
+        adjustCardSizes(cardCount)
     }
 
-    private fun createCardView(value: Int): View {
+    private fun createCardView(value: Int, cardCount: Int): View {
         val cardView = TextView(this)
         val layoutParams = GridLayout.LayoutParams()
         layoutParams.width = getCardWidth()
-        layoutParams.height = getCardHeight()
+        layoutParams.height = getCardHeight(cardCount)
         layoutParams.setMargins(5, 5, 5, 5)
-
-        // Изменим имя переменной, чтобы избежать конфликта с импортом Gravity
-        val cardGravity = Gravity.CENTER
-        layoutParams.gravity = cardGravity
-
         cardView.layoutParams = layoutParams
         cardView.text = ""
         cardView.setBackgroundResource(android.R.drawable.btn_default)
         cardView.setTextColor(Color.BLACK)
-        cardView.gravity = cardGravity
+        cardView.gravity = Gravity.CENTER
         cardView.setOnClickListener {
             onCardClicked(it, value)
         }
         return cardView
     }
-
-
 
     private fun getCardWidth(): Int {
         val screenWidth = resources.displayMetrics.widthPixels
@@ -85,9 +77,9 @@ class GameActivity : AppCompatActivity() {
         return screenWidth / columns - 10
     }
 
-    private fun getCardHeight(): Int {
-        val cardWidth = getCardWidth()
-        return (cardWidth * 0.6).toInt()
+    private fun getCardHeight(cardCount: Int): Int {
+        val screenHeight = resources.displayMetrics.heightPixels - 56
+        return (screenHeight / cardCount) * 7 / 2 - 10
     }
 
     private fun onCardClicked(view: View, value: Int) {
@@ -174,13 +166,11 @@ class GameActivity : AppCompatActivity() {
         initializeGame(cardCount)
     }
 
-    private fun adjustCardSizes() {
-        val totalCardArea = calculateTotalCardArea()
+    private fun adjustCardSizes(cardCount: Int) {
         val screenWidth = resources.displayMetrics.widthPixels
-
-        val maxColumnCount = gridLayout.columnCount
-        val cardWidth = (screenWidth - 10 * (maxColumnCount + 1)) / maxColumnCount
-        val cardHeight = (cardWidth * 0.6).toInt()
+        val columns = gridLayout.columnCount
+        val cardWidth = (screenWidth - 10 * (columns + 1)) / columns
+        val cardHeight = getCardHeight(cardCount)
 
         for (i in 0 until gridLayout.childCount) {
             val child = gridLayout.getChildAt(i)
@@ -193,16 +183,4 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-    private fun calculateTotalCardArea(): Int {
-        val cardWidth = getCardWidth()
-        val cardHeight = getCardHeight()
-        val columns = gridLayout.columnCount
-        val rows = gridLayout.rowCount
-
-        return cardWidth * columns * cardHeight * rows
-    }
 }

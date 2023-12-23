@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
     private fun startGame() {
         val cardCountInput = editTextCardCount.text.toString().toIntOrNull()
 
-        if (cardCountInput != null && cardCountInput in 2..48 && cardCountInput % 2 == 0) {
+        if (cardCountInput != null && cardCountInput >= 2 && cardCountInput % 2 == 0) {
             val intent = Intent(this, GameActivity::class.java)
             intent.putExtra("cardCount", cardCountInput)
             startActivity(intent)
         } else {
-            editTextCardCount.error = "Введите чётное число от 2 до 48"
+            editTextCardCount.error = "Введите чётное число!"
         }
     }
 }
