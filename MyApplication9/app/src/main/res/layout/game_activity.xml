@@ -8,16 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:columnCount="4" />
-
-    <Button
-        android:id="@+id/btnShuffle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="Перемешать" />
+        android:columnCount="4"
+        android:gravity="center" />
 
 </RelativeLayout>

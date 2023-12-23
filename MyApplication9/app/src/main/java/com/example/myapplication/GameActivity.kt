@@ -9,7 +9,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.Button
 import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -18,8 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 class GameActivity : AppCompatActivity() {
 
     private lateinit var gridLayout: GridLayout
-    private lateinit var btnShuffle: Button
-
     private var cardValues = mutableListOf<Int>()
     private var selectedCards = mutableListOf<Int>()
     private var pairsFound = 0
@@ -29,15 +26,13 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.game_activity)
 
         gridLayout = findViewById(R.id.gridLayout)
-        btnShuffle = findViewById(R.id.btnShuffle)
 
         val cardCount = intent.getIntExtra("cardCount", 0)
         initializeGame(cardCount)
-
-        btnShuffle.setOnClickListener {
-            resetGame(cardCount)
-        }
+        resetGame(cardCount)
+        adjustCardSizes(cardCount)
     }
+
 
     private fun initializeGame(cardCount: Int) {
         for (i in 1..cardCount / 2) {
@@ -59,7 +54,7 @@ class GameActivity : AppCompatActivity() {
         val layoutParams = GridLayout.LayoutParams()
         layoutParams.width = getCardWidth()
         layoutParams.height = getCardHeight(cardCount)
-        layoutParams.setMargins(5, 5, 5, 5)
+        layoutParams.setMargins(2, 2, 2, 2)
         cardView.layoutParams = layoutParams
         cardView.text = ""
         cardView.setBackgroundResource(android.R.drawable.btn_default)
@@ -74,13 +69,17 @@ class GameActivity : AppCompatActivity() {
     private fun getCardWidth(): Int {
         val screenWidth = resources.displayMetrics.widthPixels
         val columns = gridLayout.columnCount
-        return screenWidth / columns - 10
+        return screenWidth / columns - 4
     }
 
     private fun getCardHeight(cardCount: Int): Int {
         val screenHeight = resources.displayMetrics.heightPixels - 56
-        return (screenHeight / cardCount) * 7 / 2 - 10
+        return (screenHeight / cardCount) * gridLayout.columnCount - 4
     }
+
+
+
+
 
     private fun onCardClicked(view: View, value: Int) {
         if (selectedCards.size < 2) {
@@ -143,7 +142,6 @@ class GameActivity : AppCompatActivity() {
 
     private fun checkForWin() {
         if (pairsFound == cardValues.size / 2) {
-            btnShuffle.isEnabled = false
             showWinMessage()
         }
     }
@@ -162,15 +160,27 @@ class GameActivity : AppCompatActivity() {
         selectedCards.clear()
         pairsFound = 0
 
-        btnShuffle.isEnabled = true
         initializeGame(cardCount)
     }
 
     private fun adjustCardSizes(cardCount: Int) {
         val screenWidth = resources.displayMetrics.widthPixels
-        val columns = gridLayout.columnCount
-        val cardWidth = (screenWidth - 10 * (columns + 1)) / columns
-        val cardHeight = getCardHeight(cardCount)
+        val screenHeight = resources.displayMetrics.heightPixels - 56
+
+        var columns = 1
+        var rows = cardCount / columns
+
+        var cardWidth = (screenWidth - 10 * (columns + 1)) / columns
+        var cardHeight = getCardHeight(cardCount)
+
+        while (rows * cardHeight > screenHeight) {
+            columns++
+            rows = (cardCount + columns - 1) / columns
+            cardWidth = (screenWidth - 10 * (columns + 1)) / columns
+            cardHeight = getCardHeight(cardCount)
+        }
+
+        gridLayout.columnCount = columns
 
         for (i in 0 until gridLayout.childCount) {
             val child = gridLayout.getChildAt(i)
@@ -182,5 +192,8 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 
 }
