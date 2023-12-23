@@ -164,6 +164,21 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun adjustCardSizes(cardCount: Int) {
+        if (cardCount <= 2) {
+            gridLayout.columnCount = cardCount
+            val screenWidth = resources.displayMetrics.widthPixels
+            val cardWidth = (screenWidth - 10 * (cardCount + 1)) / cardCount
+
+            for (i in 0 until gridLayout.childCount) {
+                val child = gridLayout.getChildAt(i)
+                if (child is TextView) {
+                    val layoutParams = child.layoutParams as? GridLayout.LayoutParams
+                    layoutParams?.width = cardWidth
+                    child.layoutParams = layoutParams
+                }
+            }
+            return
+        }
         val screenWidth = resources.displayMetrics.widthPixels
         val screenHeight = resources.displayMetrics.heightPixels - 56
 
