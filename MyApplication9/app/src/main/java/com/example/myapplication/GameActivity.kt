@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
+
 import androidx.appcompat.app.AppCompatActivity
 
 class GameActivity : AppCompatActivity() {
@@ -60,16 +61,23 @@ class GameActivity : AppCompatActivity() {
         layoutParams.width = getCardWidth()
         layoutParams.height = getCardHeight()
         layoutParams.setMargins(5, 5, 5, 5)
+
+        // Изменим имя переменной, чтобы избежать конфликта с импортом Gravity
+        val cardGravity = Gravity.CENTER
+        layoutParams.gravity = cardGravity
+
         cardView.layoutParams = layoutParams
         cardView.text = ""
         cardView.setBackgroundResource(android.R.drawable.btn_default)
         cardView.setTextColor(Color.BLACK)
-        cardView.gravity = Gravity.CENTER
+        cardView.gravity = cardGravity
         cardView.setOnClickListener {
             onCardClicked(it, value)
         }
         return cardView
     }
+
+
 
     private fun getCardWidth(): Int {
         val screenWidth = resources.displayMetrics.widthPixels
@@ -184,6 +192,9 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 
 
     private fun calculateTotalCardArea(): Int {
